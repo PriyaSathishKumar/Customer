@@ -36,7 +36,21 @@ public class CustomerController {
     @GetMapping("/customerById/{id}")
     public CustomerEntity findCustomerById(@PathVariable int id) {
         logger.info("Read Customer Details By id " + id);
-        return service.getCustomerById(id);
+        CustomerEntity customer=service.getCustomerById(id);
+        try{
+            if(customer==null){
+                throw new Exception("Customer with ID " + id + " not found");
+                //return null;
+            }else{
+                return service.getCustomerById(id);
+            }
+        }catch (Exception e){
+            return null;
+        }finally {
+            logger.info("Exited");
+            return service.getCustomerById(id);
+        }
+
     }
     // get Customer details by name
     @GetMapping("/search")
