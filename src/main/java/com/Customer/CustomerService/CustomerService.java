@@ -17,13 +17,15 @@ public class CustomerService {
         return repository.save(entity);
     }
     public CustomerEntity getCustomerById(int id) {
+
         return repository.findById(id).orElse(null);
+
     }
     public List<CustomerEntity> getCustomers() throws JsonProcessingException {
         return repository.findAll();
     }
-    // get Customer detail by Customer first name
-    @Override
+    // get Customer detail by Customer name
+
     public List<CustomerEntity> getCustomerByCustomerName(String query) {
         List<CustomerEntity> entity=repository.getCustomerByCustomerName(query);
         return repository.getCustomerByCustomerName(entity);
