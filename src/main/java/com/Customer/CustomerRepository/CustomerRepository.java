@@ -9,5 +9,5 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<CustomerEntity,Integer> {
     @Query("SELECT * FROM CustomerEntity p WHERE "+"p.customerFirstName LIKE CONCAT('%',:query,'%')"+
             "p.customerLastName LIKE CONCAT('%',:query,'%')")
-    List<CustomerEntity> getCustomerByCustomerName(String query);
+    List<CustomerEntity> findByNameContainingIgnoreCase(String query);
 }

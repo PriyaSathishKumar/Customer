@@ -27,8 +27,8 @@ public class CustomerService {
     // get Customer detail by Customer name
 
     public List<CustomerEntity> getCustomerByCustomerName(String query) {
-        List<CustomerEntity> entity=repository.getCustomerByCustomerName(query);
-        return repository.getCustomerByCustomerName(entity);
+        //List<CustomerEntity> entity=repository.getCustomerByCustomerName(query);
+        return repository.findByNameContainingIgnoreCase(query);
     }
     public CustomerEntity updateCustomer(CustomerEntity entity) {
         CustomerEntity existingCustomer = repository.findById(entity.getCustomerId()).orElse(null);
