@@ -1,26 +1,29 @@
 package com.Customer.CustomerService;
 
 import com.Customer.CustomerEntity.CustomerEntity;
-import com.Customer.CustomerRepository.CustomerRepository;
+import com.Customer.CustomerRepository.CustomerRepository1;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
     @Autowired
-    private CustomerRepository repository;
+    private CustomerRepository1 repository;
     public CustomerEntity saveCustomerDetails(@RequestBody CustomerEntity entity){
+
         return repository.save(entity);
     }
     public CustomerEntity getCustomerById(int id) {
+           return repository.findById(id).orElse(null);
+        }
 
-        return repository.findById(id).orElse(null);
 
-    }
+
     public List<CustomerEntity> getCustomers() throws JsonProcessingException {
         return repository.findAll();
     }
@@ -28,7 +31,7 @@ public class CustomerService {
 
     public List<CustomerEntity> getCustomerByCustomerName(String query) {
         //List<CustomerEntity> entity=repository.getCustomerByCustomerName(query);
-        return repository.findByNameContainingIgnoreCase(query);
+        return repository.findBycustomerFirstNameContainingAndIgnoreCase(query);
     }
     public CustomerEntity updateCustomer(CustomerEntity entity) {
         CustomerEntity existingCustomer = repository.findById(entity.getCustomerId()).orElse(null);

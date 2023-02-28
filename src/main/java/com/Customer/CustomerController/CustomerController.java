@@ -1,7 +1,7 @@
 package com.Customer.CustomerController;
 
 import com.Customer.CustomerEntity.CustomerEntity;
-import com.Customer.CustomerRepository.CustomerRepository;
+import com.Customer.CustomerRepository.CustomerRepository1;
 import com.Customer.CustomerService.CustomerService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.log4j.Logger;
@@ -17,7 +17,7 @@ public class CustomerController {
     private CustomerService service;
     private static final Logger logger= Logger.getLogger(String.valueOf(CustomerController.class));
     @Autowired
-    private CustomerRepository repository;
+    private CustomerRepository1 repository;
     //private String query;
 
     @PostMapping("/addcustomer")
@@ -36,21 +36,7 @@ public class CustomerController {
     @GetMapping("/customerById/{id}")
     public CustomerEntity findCustomerById(@PathVariable int id) {
         logger.info("Read Customer Details By id " + id);
-        CustomerEntity customer=service.getCustomerById(id);
-        try{
-            if(customer==null){
-                throw new Exception("Customer with ID " + id + " not found");
-                //return null;
-            }else{
-                return service.getCustomerById(id);
-            }
-        }catch (Exception e){
-            return null;
-        }finally {
-            logger.info("Exited");
-            return service.getCustomerById(id);
-        }
-
+        return service.getCustomerById(id);
     }
     // get Customer details by name
     @GetMapping("/search")
